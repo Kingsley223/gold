@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aurum House</title>
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2312100d'/%3E%3Ccircle cx='32' cy='32' r='23' fill='%23d6a842'/%3E%3Ccircle cx='32' cy='32' r='19' fill='%23f7e2a1'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Georgia,serif' font-size='31' font-weight='700' fill='%2312100d'%3EA%3C/text%3E%3C/svg%3E">
 
   <style>
     :root {
@@ -343,6 +345,340 @@
       background: #fff;
       color: #4285f4;
       font-weight: 900;
+    }
+
+    .auth-shell {
+      background:
+        linear-gradient(120deg, rgba(8, 7, 6, 0.76), rgba(8, 7, 6, 0.48)),
+        url("https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=85") center/cover;
+    }
+
+    .auth-shell .container {
+      width: min(94vw, 960px);
+    }
+
+    .auth-panel.market-auth {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+      min-height: 690px;
+    }
+
+    .auth-side {
+      position: relative;
+      display: grid;
+      align-content: end;
+      gap: 22px;
+      padding: 34px;
+      border-right: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(15, 12, 9, 0.15), rgba(15, 12, 9, 0.88)),
+        url("https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=85") center/cover;
+    }
+
+    .auth-side::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(214, 168, 66, 0.26), transparent 44%);
+      pointer-events: none;
+    }
+
+    .auth-side-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .auth-side h1 {
+      margin-bottom: 14px;
+      font-family: Georgia, serif;
+      font-size: clamp(38px, 5vw, 64px);
+      font-weight: 500;
+      line-height: 0.98;
+    }
+
+    .auth-side p {
+      color: rgba(255, 248, 231, 0.82);
+      line-height: 1.7;
+    }
+
+    .auth-trust {
+      display: grid;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .auth-trust div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 248, 231, 0.86);
+    }
+
+    .auth-trust .icon {
+      color: var(--champagne);
+    }
+
+    .auth-form-panel {
+      position: relative;
+      padding: 34px;
+    }
+
+    .auth-progress {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 18px 0 24px;
+    }
+
+    .auth-progress span {
+      display: grid;
+      place-items: center;
+      min-height: 34px;
+      border: 1px solid rgba(247, 226, 161, 0.18);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    .auth-progress span.active {
+      background: rgba(214, 168, 66, 0.16);
+      color: var(--champagne);
+    }
+
+    .auth-method-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 5px;
+      border: 1px solid rgba(247, 226, 161, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .auth-method-tabs button {
+      min-height: 42px;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .auth-method-tabs button.active {
+      background: linear-gradient(135deg, #fff0b8 0%, #d7a943 58%, #8c6120 100%);
+      color: #15100a;
+    }
+
+    .auth-method {
+      margin-top: 18px;
+    }
+
+    .auth-note {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .auth-mini-link {
+      color: var(--champagne);
+      background: transparent;
+      min-height: auto;
+      padding: 0;
+      font-weight: 800;
+    }
+
+    .otp-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .otp-row .secondary-btn {
+      min-height: 50px;
+      margin-bottom: 0;
+      white-space: nowrap;
+    }
+
+    .otp-box {
+      margin-top: 16px;
+      padding: 15px;
+      border: 1px solid rgba(111, 195, 155, 0.28);
+      border-radius: 8px;
+      background: rgba(111, 195, 155, 0.08);
+    }
+
+    .otp-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .auth-shell.jumia-style {
+      background: #fff;
+      color: #222;
+    }
+
+    .auth-shell.jumia-style .container {
+      width: min(92vw, 680px);
+    }
+
+    .auth-shell.jumia-style .auth-panel {
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    .auth-shell.jumia-style .auth-panel::before {
+      display: none;
+    }
+
+    .jumia-auth-card {
+      display: grid;
+      justify-items: center;
+      padding: 70px 18px 36px;
+      text-align: center;
+    }
+
+    .jumia-logo {
+      display: grid;
+      place-items: center;
+      width: 96px;
+      height: 96px;
+      margin-bottom: 28px;
+      border-radius: 50%;
+      background: #ff990f;
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(255, 153, 15, 0.26);
+    }
+
+    .jumia-logo .icon {
+      width: 58px;
+      height: 58px;
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .jumia-auth-card h2 {
+      margin: 0 0 14px;
+      color: #000;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .jumia-auth-card .panel-copy {
+      margin: 0 0 44px;
+      color: #313131;
+      font-size: 24px;
+      line-height: 1.35;
+    }
+
+    .jumia-form {
+      width: min(100%, 650px);
+    }
+
+    .jumia-field {
+      position: relative;
+      margin-bottom: 98px;
+    }
+
+    .jumia-field label {
+      position: absolute;
+      top: -11px;
+      left: 18px;
+      z-index: 1;
+      margin: 0;
+      padding: 0 7px;
+      background: #fff;
+      color: #ff990f;
+      font-size: 16px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .jumia-auth-card input {
+      min-height: 84px;
+      border: 2px solid #ff990f;
+      border-radius: 5px;
+      background: #fff;
+      color: #111;
+      font-size: 22px;
+    }
+
+    .jumia-auth-card input:focus {
+      border-color: #ff990f;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255, 153, 15, 0.12);
+    }
+
+    .jumia-auth-card .primary-btn {
+      min-height: 78px;
+      margin: 0;
+      border-radius: 5px;
+      background: #ff990f;
+      color: #fff;
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    .jumia-divider {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 18px;
+      width: min(100%, 650px);
+      margin: 86px 0 28px;
+      color: #6b6b6b;
+      font-size: 20px;
+    }
+
+    .jumia-divider::before,
+    .jumia-divider::after {
+      content: "";
+      height: 1px;
+      background: #ddd;
+    }
+
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .social-btn {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 34px;
+      font-weight: 900;
+    }
+
+    .social-btn.facebook {
+      background: #1877f2;
+    }
+
+    .social-btn.google {
+      background: conic-gradient(from -45deg, #4285f4 0 25%, #34a853 0 50%, #fbbc05 0 75%, #ea4335 0);
+    }
+
+    .auth-back {
+      margin-top: 18px;
+      color: #ff990f;
+      background: transparent;
+      font-weight: 800;
     }
 
     .app-shell {
@@ -1456,7 +1792,6 @@
 
     #total,
     #checkoutTotal,
-    #checkoutDelivery,
     #grandTotal {
       margin: 0;
       color: var(--champagne);
@@ -1696,15 +2031,74 @@
       gap: 12px;
     }
 
+    .loading-popout {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(8, 7, 6, 0.52);
+      backdrop-filter: blur(8px);
+    }
+
+    .loading-card {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      width: min(88vw, 330px);
+      padding: 26px;
+      border: 1px solid rgba(247, 226, 161, 0.36);
+      border-radius: 8px;
+      background: rgba(15, 12, 9, 0.97);
+      color: var(--ivory);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.58);
+      animation: centerRollIn 620ms cubic-bezier(.18, .9, .2, 1.12) both;
+    }
+
+    .loading-ring {
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      border: 3px solid rgba(247, 226, 161, 0.18);
+      border-top-color: var(--champagne);
+      border-right-color: var(--gold);
+      border-radius: 50%;
+      animation: loadingSpin 820ms linear infinite;
+    }
+
+    .loading-ring::after {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 24px rgba(214, 168, 66, 0.55);
+    }
+
+    .loading-card strong {
+      font-family: Georgia, serif;
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    .loading-card span {
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
     .toast-stack {
       position: fixed;
       z-index: 20;
-      right: 20px;
-      bottom: 20px;
+      right: 24px;
+      top: 92px;
       display: grid;
       gap: 12px;
-      width: min(92vw, 380px);
+      width: min(92vw, 420px);
       pointer-events: none;
+      perspective: 900px;
     }
 
     .toast {
@@ -1716,8 +2110,13 @@
       border-radius: 8px;
       background: rgba(15, 12, 9, 0.96);
       box-shadow: 0 18px 46px rgba(0, 0, 0, 0.42);
-      animation: toastIn 240ms ease both;
+      animation: toastRollIn 780ms cubic-bezier(.18, .9, .2, 1.12) both;
+      transform-origin: right bottom;
       pointer-events: auto;
+    }
+
+    .toast.rolling-out {
+      animation: toastRollOut 520ms ease-in both;
     }
 
     .toast-icon {
@@ -1728,6 +2127,7 @@
       border-radius: 50%;
       background: rgba(214, 168, 66, 0.16);
       color: var(--champagne);
+      animation: toastWheel 780ms cubic-bezier(.18, .9, .2, 1.12) both;
     }
 
     .toast.success .toast-icon {
@@ -1756,18 +2156,18 @@
       z-index: 18;
       display: grid;
       place-items: center;
-      width: 58px;
-      height: 58px;
+      width: 46px;
+      height: 46px;
       border: 2px solid rgba(247, 226, 161, 0.58);
       border-radius: 50%;
       background: #141311;
       color: var(--champagne);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32), 0 0 0 4px rgba(214, 168, 66, 0.1);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(214, 168, 66, 0.1);
     }
 
     .chat-launcher .icon {
-      width: 25px;
-      height: 25px;
+      width: 19px;
+      height: 19px;
     }
 
     .chat-window {
@@ -1954,15 +2354,65 @@
       height: 26px;
     }
 
-    @keyframes toastIn {
-      from {
+    @keyframes toastRollIn {
+      0% {
         opacity: 0;
-        transform: translateY(12px) scale(0.98);
+        transform: translateX(125%) translateY(28px) rotate(32deg) rotateY(-18deg) scale(0.82);
       }
 
-      to {
+      68% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateX(-10px) translateY(0) rotate(-6deg) rotateY(0) scale(1.02);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0) rotate(0) scale(1);
+      }
+    }
+
+    @keyframes toastRollOut {
+      0% {
+        opacity: 1;
+        transform: translateX(0) rotate(0) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateX(125%) translateY(18px) rotate(28deg) scale(0.9);
+      }
+    }
+
+    @keyframes toastWheel {
+      0% {
+        transform: rotate(-420deg) scale(0.85);
+      }
+
+      100% {
+        transform: rotate(0) scale(1);
+      }
+    }
+
+    @keyframes centerRollIn {
+      0% {
+        opacity: 0;
+        transform: translateY(46px) rotate(-22deg) scale(0.76);
+      }
+
+      70% {
+        opacity: 1;
+        transform: translateY(-8px) rotate(5deg) scale(1.03);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0) scale(1);
+      }
+    }
+
+    @keyframes loadingSpin {
+      to {
+        transform: rotate(360deg);
       }
     }
 
@@ -1982,6 +2432,16 @@
 
       .product-detail-grid {
         grid-template-columns: 1fr;
+      }
+
+      .auth-panel.market-auth {
+        grid-template-columns: 1fr;
+      }
+
+      .auth-side {
+        min-height: 300px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
       }
     }
 
@@ -2077,8 +2537,8 @@
       .chat-launcher {
         right: 14px;
         bottom: 14px;
-        width: 52px;
-        height: 52px;
+        width: 44px;
+        height: 44px;
       }
 
       .chat-window {
@@ -2095,6 +2555,15 @@
 
       .chat-bubble {
         font-size: 17px;
+      }
+
+      .auth-form-panel,
+      .auth-side {
+        padding: 24px;
+      }
+
+      .otp-row {
+        grid-template-columns: 1fr;
       }
 
       .order-top,
@@ -2181,44 +2650,64 @@
   </svg>
 
   <!-- AUTH -->
-  <div id="authPage" class="auth-shell">
+  <div id="authPage" class="auth-shell jumia-style">
     <div class="container">
       <div class="auth-panel">
-        <div class="panel-inner">
-          <div class="brand-mark">A</div>
-          <p class="eyebrow">Private bullion atelier</p>
-          <h2 id="authTitle">Sign In</h2>
-          <p class="panel-copy">Enter the members-only marketplace for curated gold jewelry, bars, and heirloom-grade
-            pieces.</p>
+        <div class="jumia-auth-card">
+          <div class="jumia-logo"><svg class="icon"><use href="#icon-spark"></use></svg></div>
+          <h2 id="authTitle">Welcome to Aurum House</h2>
+          <p class="panel-copy">Use your email or phone to log in or sign up.</p>
 
-          <label for="googleEmail">Google Account</label>
-          <input type="email" id="googleEmail" placeholder="name@gmail.com">
-
-          <label for="authPhone">Phone Number</label>
-          <div class="phone-grid">
-            <select id="authCountryCode" aria-label="Phone country" onchange="updateStateOptions('authCountryCode', 'authState')"></select>
-            <input type="tel" id="authPhone" placeholder="8026270935">
+          <div id="authStartPanel" class="jumia-form">
+            <div class="jumia-field">
+              <label for="authIdentity">Email or Mobile Number*</label>
+              <input type="text" id="authIdentity" autocomplete="username">
+            </div>
+            <button class="primary-btn" onclick="continueAuthIdentity()">Continue</button>
           </div>
 
-          <label for="authState">State / Region</label>
-          <select id="authState"></select>
+          <div id="phoneAuthPanel" class="jumia-form hidden">
+            <div class="jumia-field">
+              <label for="authOtp">Verification Code*</label>
+              <input type="text" id="authOtp" maxlength="6" inputmode="numeric" placeholder="Enter 6-digit code">
+            </div>
+            <button class="primary-btn" onclick="verifyPhoneCode()">Verify & Continue</button>
+            <button class="auth-back" onclick="backToAuthStart()">Change email or phone</button>
+            <button class="auth-back" onclick="sendPhoneCode()">Resend code</button>
+            <div id="otpBox" class="otp-box hidden">
+              <strong>Code sent</strong>
+              <p class="auth-note">For this demo, the code appears in the popup.</p>
+              <div class="otp-meta"><span id="otpDestination">Phone number</span></div>
+            </div>
+          </div>
 
-          <button class="secondary-btn google-btn" onclick="handleGoogleAuth()"><span class="google-mark">G</span>Continue with Google</button>
+          <div id="passwordAuthPanel" class="jumia-form hidden">
+            <div class="jumia-field">
+              <label for="password">Password*</label>
+              <input type="password" id="password" autocomplete="current-password">
+            </div>
+            <input type="hidden" id="username">
+            <button class="primary-btn" onclick="handleAuth()">Continue</button>
+            <button class="auth-back" onclick="backToAuthStart()">Change email or phone</button>
+          </div>
 
-          <div class="auth-divider">or use password</div>
+          <div class="hidden">
+            <input type="text" id="authFullName">
+            <input type="email" id="googleEmail">
+            <div class="phone-grid">
+              <select id="authCountryCode" aria-label="Phone country"
+                onchange="updateStateOptions('authCountryCode', 'authState')"></select>
+              <input type="tel" id="authPhone">
+            </div>
+            <select id="authState"></select>
+          </div>
 
-          <label for="username">Username</label>
-          <input type="text" id="username" placeholder="Your client name">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Your private code">
-
-          <button class="primary-btn" onclick="handleAuth()"><svg class="icon">
-              <use href="#icon-lock"></use>
-            </svg>Continue</button>
-
-          <p onclick="toggleAuth()" id="switchText" class="switch-link">
-            Don't have account? Sign Up
-          </p>
+          <div class="jumia-divider">Or log in with</div>
+          <div class="social-row">
+            <button class="social-btn facebook" onclick="notify('Facebook login', 'Facebook sign-in can be connected with a real provider later.', 'success')">f</button>
+            <button class="social-btn google" onclick="handleGoogleAuth()">G</button>
+          </div>
+          <p onclick="toggleAuth()" id="switchText" class="switch-link">Don't have account? Create one</p>
         </div>
       </div>
     </div>
@@ -2373,9 +2862,9 @@
             <use href="#icon-shield"></use>
           </svg><strong>Vault Reserve</strong><span>Track high-value bars and collectible items with a premium buying
             flow.</span><button class="secondary-btn">View bullion</button></div>
-        <div class="service-card" onclick="openFeature('whiteglove')"><svg class="icon">
+        <div class="service-card" onclick="openFeature('handoff')"><svg class="icon">
             <use href="#icon-truck"></use>
-          </svg><strong>White-Glove Delivery</strong><span>Choose insured delivery, appointment handoff, or discreet
+          </svg><strong>Priority Handoff</strong><span>Choose insured delivery, appointment handoff, or discreet
             courier notes.</span><button class="secondary-btn">Plan delivery</button></div>
       </section>
 
@@ -2558,7 +3047,8 @@
                   <div>
                     <label for="phone">Phone Number</label>
                     <div class="phone-grid">
-                      <select id="countryCode" aria-label="Country code" onchange="updateStateOptions('countryCode', 'state')">
+                      <select id="countryCode" aria-label="Country code"
+                        onchange="updateStateOptions('countryCode', 'state')">
                         <option value="+234">Nigeria +234</option>
                       </select>
                       <input type="text" id="phone" placeholder="8026270935">
@@ -2571,14 +3061,6 @@
                   <div>
                     <label for="state">State / Region</label>
                     <select id="state"></select>
-                  </div>
-                  <div>
-                    <label for="deliveryMethod">Delivery Method</label>
-                    <select id="deliveryMethod" onchange="updateCheckoutTotals()">
-                      <option value="75">Insured courier - $75 / ₦112,500</option>
-                      <option value="140">White-glove handoff - $140 / ₦210,000</option>
-                      <option value="0">Pickup appointment - Free</option>
-                    </select>
                   </div>
                 </div>
               </div>
@@ -2620,16 +3102,13 @@
                   <div class="total-line"><span>Items</span>
                     <p id="checkoutTotal"></p>
                   </div>
-                  <div class="total-line"><span>Delivery</span>
-                    <p id="checkoutDelivery"></p>
-                  </div>
                   <div class="total-line grand"><span>Grand Total</span>
                     <p id="grandTotal"></p>
                   </div>
                 </div>
                 <p><svg class="icon">
                     <use href="#icon-shield"></use>
-                  </svg> Your order is validated before confirmation. Delivery and payment preferences are included in
+                  </svg> Your order is validated before confirmation. Payment details are included in
                   the final popout.</p>
               </div>
 
@@ -2694,6 +3173,14 @@
     </div>
   </div>
 
+  <div id="loadingPopout" class="loading-popout hidden" aria-live="polite" aria-busy="true">
+    <div class="loading-card">
+      <div class="loading-ring"></div>
+      <strong id="loadingTitle">Working</strong>
+      <span id="loadingText">Please wait...</span>
+    </div>
+  </div>
+
   <div id="toastStack" class="toast-stack"></div>
 
   <button id="chatLauncher" class="chat-launcher" onclick="toggleChat()" aria-label="Open concierge chat">
@@ -2719,8 +3206,9 @@
     <div id="chatMessages" class="chat-messages">
       <div class="chat-row bot">
         <div class="chat-avatar">A</div>
-        <div class="chat-bubble">Hi — I'm Auri, your Aurum House concierge. Ask me about pricing, services, delivery,
-          Paystack, or bank transfer.</div>
+        <div class="chat-bubble">Hi, I'm Auri, your Aurum House concierge. Ask me about products, payment steps,
+          pricing,
+          delivery, Paystack, or bank transfer.</div>
       </div>
     </div>
 
@@ -2752,6 +3240,9 @@
     let activeFeature = null;
     let activeCategory = "All";
     let lastCustomerMessage = "";
+    let authMethod = "phone";
+    let pendingOtp = "";
+    let pendingOtpPhone = "";
     const whatsappNumber = "2348026270935";
     const nairaRate = 1500;
     const emailConfig = {
@@ -2788,14 +3279,14 @@
         title: "Certified Gold",
         icon: "icon-gem",
         text: "Use this to jump into the catalog and browse pieces marked by category, grade, and reserve value.",
-        bullets: ["Jewelry and bullion categories", "AU-grade product labels", "Expanded 24-piece catalog"],
+        bullets: ["Jewelry and bullion categories", "AU-grade product labels", "Expanded 100-piece catalog"],
         action: "Browse Collection"
       },
       dispatch: {
         title: "Priority Dispatch",
         icon: "icon-truck",
-        text: "Choose delivery options during checkout, including insured courier, white-glove handoff, and pickup appointment.",
-        bullets: ["Insured courier", "White-glove handoff", "Pickup appointment"],
+        text: "Fill your address details during checkout and the team will confirm the best delivery arrangement after payment review.",
+        bullets: ["Address capture", "Payment review", "Delivery confirmation"],
         action: "View Delivery"
       },
       checkout: {
@@ -2819,11 +3310,11 @@
         bullets: ["Bullion bars", "Coin set searches", "High-value reserve pieces"],
         action: "Show Bullion"
       },
-      whiteglove: {
-        title: "White-Glove Delivery",
+      handoff: {
+        title: "Priority Handoff",
         icon: "icon-truck",
-        text: "White-glove delivery is available as a checkout delivery method for customers who want appointment-style handling.",
-        bullets: ["Appointment handoff", "Discreet courier note", "Premium delivery fee shown"],
+        text: "Add your address and any handoff request in the concierge note. The team will confirm the arrangement after checkout.",
+        bullets: ["Address details", "Concierge note", "Post-checkout confirmation"],
         action: "Plan Delivery"
       }
     };
@@ -2853,7 +3344,83 @@
       { id: 21, name: "Gold Coin Pendant", price: 690, category: "Jewelry", detail: "Coin-inspired pendant with a vintage face and polished edge.", image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 44, comments: ["Vintage look is excellent.", "Pairs well with a simple chain."] },
       { id: 22, name: "Gold Tie Bar", price: 320, category: "Accessories", detail: "Formal tie bar with a sleek gold finish for tailored looks.", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80", rating: 4.3, reviews: 29, comments: ["Sharp detail for suits.", "Simple and clean."] },
       { id: 23, name: "Collector Gold Watch", price: 2450, category: "Timepiece", detail: "Premium timepiece with gold-tone detailing and reserve-worthy presence.", image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 55, comments: ["Feels like a serious collector watch.", "Beautiful finishing on the case."] },
-      { id: 24, name: "Gold Charm Bracelet", price: 870, category: "Jewelry", detail: "Charm bracelet with refined links and gift-ready personality.", image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 62, comments: ["Lovely gift choice.", "The charms make it feel personal."] }
+      { id: 24, name: "Gold Charm Bracelet", price: 870, category: "Jewelry", detail: "Charm bracelet with refined links and gift-ready personality.", image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 62, comments: ["Lovely gift choice.", "The charms make it feel personal."] },
+      { id: 25, name: "Gold Rope Chain", price: 940, category: "Jewelry", detail: "Twisted rope links with a bold shine and secure clasp.", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 88, comments: ["The rope detail shines beautifully.", "Strong clasp and rich color."] },
+      { id: 26, name: "Gold Wedding Band", price: 520, category: "Jewelry", detail: "Classic polished band with a smooth comfort-fit interior.", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 116, comments: ["Simple and perfect.", "Feels premium every day."] },
+      { id: 27, name: "Gold Drop Earrings", price: 680, category: "Jewelry", detail: "Elegant drop silhouette with formal sparkle and light movement.", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 74, comments: ["Beautiful for events.", "Light enough to wear all night."] },
+      { id: 28, name: "Gold Layered Necklace", price: 1460, category: "Jewelry", detail: "Layered neckline piece with soft drape and premium presence.", image: "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 91, comments: ["The layers sit perfectly.", "Very luxurious look."] },
+      { id: 29, name: "Gold ID Bracelet", price: 790, category: "Jewelry", detail: "Polished ID plate bracelet with clean links and gift-ready style.", image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 56, comments: ["Nice personal gift.", "The plate finish is excellent."] },
+      { id: 30, name: "Gold Cuban Chain", price: 1780, category: "Jewelry", detail: "Heavy Cuban links with a confident profile and mirror finish.", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 132, comments: ["Solid weight and huge shine.", "A proper statement chain."] },
+      { id: 31, name: "Gold Hoops", price: 430, category: "Jewelry", detail: "Polished hoop earrings for daily luxury and occasion styling.", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80", rating: 4.5, reviews: 63, comments: ["Easy to wear daily.", "Classic and bright."] },
+      { id: 32, name: "Gold Pearl Pendant", price: 740, category: "Jewelry", detail: "Warm gold setting paired with a pearl-style centerpiece.", image: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 49, comments: ["Very graceful piece.", "The gold and pearl look rich."] },
+      { id: 33, name: "Gold Gram Bar Set", price: 1520, category: "Bullion", detail: "Small-format bullion bars arranged for flexible collecting.", image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 77, comments: ["Good for staged buying.", "Clean presentation."] },
+      { id: 34, name: "Gold Proof Coin", price: 960, category: "Bullion", detail: "Proof-style gold coin with collector appeal and secure packaging.", image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 69, comments: ["Excellent coin detail.", "Arrived well protected."] },
+      { id: 35, name: "Gold Kilo Bar", price: 6200, category: "Bullion", detail: "Large reserve bar for serious buyers and long-hold collectors.", image: "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=900&q=80", rating: 5.0, reviews: 41, comments: ["Serious reserve piece.", "Very impressive in hand."] },
+      { id: 36, name: "Gold Desk Pen", price: 580, category: "Accessories", detail: "Executive writing piece with polished gold-tone detailing.", image: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=900&q=80", rating: 4.4, reviews: 28, comments: ["Excellent office gift.", "Looks sharp on the desk."] },
+      { id: 37, name: "Gold Lapel Pin", price: 280, category: "Accessories", detail: "Compact formal pin that adds a warm gold accent to jackets.", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80", rating: 4.3, reviews: 37, comments: ["Small but classy.", "Great suit detail."] },
+      { id: 38, name: "Gold Watch Bracelet", price: 1690, category: "Timepiece", detail: "Gold-tone bracelet watch with a refined dress profile.", image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 73, comments: ["Dressy and clean.", "The bracelet finish is beautiful."] },
+      { id: 39, name: "Gold Chronograph", price: 2680, category: "Timepiece", detail: "Chronograph styling with gold accents and collector character.", image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 61, comments: ["Looks powerful on wrist.", "Great collector feel."] },
+      { id: 40, name: "Gold Gift Set", price: 1320, category: "Accessories", detail: "Curated gold accessory set for premium gifting and celebrations.", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 52, comments: ["Perfect gift package.", "Everything felt premium."] },
+      { id: 41, name: "Gold Figaro Chain", price: 880, category: "Jewelry", detail: "Alternating Figaro links with a polished everyday luxury finish.", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 84, comments: ["Nice link pattern.", "Looks rich and clean."] },
+      { id: 42, name: "Gold Box Chain", price: 760, category: "Jewelry", detail: "Square box links with crisp shine and a refined necklace profile.", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 58, comments: ["Very neat chain.", "The shine is sharp."] },
+      { id: 43, name: "Gold Herringbone Chain", price: 1150, category: "Jewelry", detail: "Flat herringbone styling with a smooth statement surface.", image: "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 72, comments: ["Sits flat and elegant.", "Premium look."] },
+      { id: 44, name: "Gold Name Pendant", price: 620, category: "Jewelry", detail: "Personal-style pendant with a clean polished face.", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80", rating: 4.5, reviews: 46, comments: ["Beautiful personal touch.", "Great gift idea."] },
+      { id: 45, name: "Gold Heart Pendant", price: 540, category: "Jewelry", detail: "Heart-shaped pendant with bright edges and soft sentiment.", image: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 64, comments: ["Cute and classy.", "Perfect for a gift."] },
+      { id: 46, name: "Gold Cross Pendant", price: 590, category: "Jewelry", detail: "Classic cross pendant with polished lines and balanced weight.", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 71, comments: ["Simple and meaningful.", "The finish is bright."] },
+      { id: 47, name: "Gold Stack Ring", price: 410, category: "Jewelry", detail: "Slim stackable ring made for layered styling.", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=80", rating: 4.4, reviews: 39, comments: ["Looks great stacked.", "Clean little ring."] },
+      { id: 48, name: "Gold Cocktail Ring", price: 980, category: "Jewelry", detail: "Bold occasion ring with a dramatic gold profile.", image: "https://images.unsplash.com/photo-1603561596112-0a132b757442?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 51, comments: ["A real event piece.", "Very eye-catching."] },
+      { id: 49, name: "Gold Promise Ring", price: 470, category: "Jewelry", detail: "Sweet polished ring with a clean gift-ready silhouette.", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 57, comments: ["Lovely and simple.", "Great promise gift."] },
+      { id: 50, name: "Gold Stud Earrings", price: 350, category: "Jewelry", detail: "Minimal polished studs for daily wear and subtle shine.", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80", rating: 4.5, reviews: 81, comments: ["Easy daily earrings.", "Small but bright."] },
+      { id: 51, name: "Gold Huggie Earrings", price: 510, category: "Jewelry", detail: "Close-fit huggie earrings with a neat luxury finish.", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 62, comments: ["Comfortable fit.", "Very polished."] },
+      { id: 52, name: "Gold Ear Cuff", price: 300, category: "Jewelry", detail: "Modern cuff accent for layered ear styling.", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80", rating: 4.3, reviews: 34, comments: ["Stylish accent.", "Nice modern look."] },
+      { id: 53, name: "Gold Slave Bracelet", price: 1220, category: "Jewelry", detail: "Connected bracelet and ring styling for special occasions.", image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 43, comments: ["Beautiful for events.", "Very unique style."] },
+      { id: 54, name: "Gold Palm Cuff", price: 860, category: "Jewelry", detail: "Open cuff design with a sculptural gold statement.", image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 38, comments: ["Strong fashion piece.", "Looks handmade and rich."] },
+      { id: 55, name: "Gold Waist Chain", price: 1120, category: "Jewelry", detail: "Delicate waist chain with polished links and occasion sparkle.", image: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 48, comments: ["Very elegant.", "Great styling piece."] },
+      { id: 56, name: "Gold Toe Ring Set", price: 260, category: "Jewelry", detail: "Small matching toe rings with soft shine.", image: "https://images.unsplash.com/photo-1512163143273-bde0e3cc7407?auto=format&fit=crop&w=900&q=80", rating: 4.2, reviews: 26, comments: ["Cute set.", "Good finish for the size."] },
+      { id: 57, name: "Gold Baby Bracelet", price: 390, category: "Jewelry", detail: "Tiny bracelet profile for keepsake gifting.", image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 45, comments: ["Lovely keepsake.", "So neat and sweet."] },
+      { id: 58, name: "Gold Bridal Set", price: 2850, category: "Jewelry", detail: "Coordinated bridal gold set for ceremony styling.", image: "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 69, comments: ["Wedding-ready set.", "Looks very premium."] },
+      { id: 59, name: "Gold Festival Set", price: 2420, category: "Jewelry", detail: "Celebration jewelry set with matching gold accents.", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 54, comments: ["Perfect for occasions.", "Beautiful full set."] },
+      { id: 60, name: "Gold Medallion", price: 1350, category: "Jewelry", detail: "Large medallion pendant with collector-style presence.", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 60, comments: ["Heavy and impressive.", "Statement pendant."] },
+      { id: 61, name: "Gold Sovereign Coin", price: 1280, category: "Bullion", detail: "Sovereign-style gold coin for collectors and reserve buyers.", image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 65, comments: ["Nice collector coin.", "Great packaging."] },
+      { id: 62, name: "Gold Maple Coin", price: 1310, category: "Bullion", detail: "Premium coin-style bullion with a crisp display finish.", image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 47, comments: ["Sharp coin detail.", "Good reserve piece."] },
+      { id: 63, name: "Gold Eagle Coin", price: 1330, category: "Bullion", detail: "Eagle-inspired coin piece with collector appeal.", image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 52, comments: ["Beautiful face detail.", "Strong collector feel."] },
+      { id: 64, name: "Gold Bar Pendant", price: 820, category: "Jewelry", detail: "Mini bar pendant that blends bullion styling with jewelry wear.", image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 44, comments: ["Cool bullion look.", "Nice everyday pendant."] },
+      { id: 65, name: "Gold Keychain", price: 340, category: "Accessories", detail: "Luxury carry keychain with polished gold-tone detailing.", image: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=900&q=80", rating: 4.3, reviews: 31, comments: ["Nice carry item.", "Feels premium."] },
+      { id: 66, name: "Gold Card Holder", price: 620, category: "Accessories", detail: "Slim card holder with a refined gold accent finish.", image: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=900&q=80", rating: 4.4, reviews: 29, comments: ["Clean and useful.", "Good executive gift."] },
+      { id: 67, name: "Gold Sunglass Chain", price: 420, category: "Accessories", detail: "Gold-link eyewear chain for stylish daily carry.", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80", rating: 4.3, reviews: 24, comments: ["Very stylish.", "Nice small accessory."] },
+      { id: 68, name: "Gold Pocket Watch", price: 1880, category: "Timepiece", detail: "Classic pocket watch styling with a gold collector finish.", image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 36, comments: ["Vintage and classy.", "Lovely collector piece."] },
+      { id: 69, name: "Gold Skeleton Watch", price: 3120, category: "Timepiece", detail: "Open-work dial styling with gold-tone case details.", image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 42, comments: ["The dial is beautiful.", "Serious watch look."] },
+      { id: 70, name: "Gold Couple Watch Set", price: 3580, category: "Timepiece", detail: "Matching gold-tone watches for paired gifting.", image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 49, comments: ["Perfect couple gift.", "Both watches look premium."] },
+      { id: 71, name: "Gold Snake Chain", price: 990, category: "Jewelry", detail: "Smooth snake-chain profile with a sleek reflective finish.", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 66, comments: ["Very smooth shine.", "Feels elegant on the neck."] },
+      { id: 72, name: "Gold Franco Chain", price: 1420, category: "Jewelry", detail: "Dense Franco links with a strong luxury weight.", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 74, comments: ["Solid chain.", "The links look expensive."] },
+      { id: 73, name: "Gold Byzantine Chain", price: 1680, category: "Jewelry", detail: "Intricate Byzantine link pattern with collector styling.", image: "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 58, comments: ["Beautiful link work.", "Very special piece."] },
+      { id: 74, name: "Gold Omega Necklace", price: 1540, category: "Jewelry", detail: "Structured necklace with a smooth collar-like shine.", image: "https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 44, comments: ["Clean neckline look.", "Feels very premium."] },
+      { id: 75, name: "Gold Locket", price: 730, category: "Jewelry", detail: "Classic gold locket for personal keepsakes and gifting.", image: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 52, comments: ["Sweet gift piece.", "The polish is lovely."] },
+      { id: 76, name: "Gold Initial Pendant", price: 480, category: "Jewelry", detail: "Letter pendant with a polished personal finish.", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=80", rating: 4.5, reviews: 61, comments: ["Nice custom feel.", "Simple and shiny."] },
+      { id: 77, name: "Gold Birthstone Ring", price: 690, category: "Jewelry", detail: "Gold ring styling built around a colorful birthstone accent.", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 47, comments: ["Personal and pretty.", "Great birthday gift."] },
+      { id: 78, name: "Gold Dome Ring", price: 840, category: "Jewelry", detail: "Rounded dome face with a bold polished surface.", image: "https://images.unsplash.com/photo-1603561596112-0a132b757442?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 38, comments: ["Bold and smooth.", "Looks powerful."] },
+      { id: 79, name: "Gold Eternity Band", price: 1180, category: "Jewelry", detail: "Continuous band styling with elegant occasion presence.", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 55, comments: ["Very romantic.", "Beautiful finish all round."] },
+      { id: 80, name: "Gold Cluster Earrings", price: 760, category: "Jewelry", detail: "Cluster-style earrings with bright layered sparkle.", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 43, comments: ["Nice sparkle.", "Great for parties."] },
+      { id: 81, name: "Gold Chandelier Earrings", price: 1040, category: "Jewelry", detail: "Long chandelier silhouette with formal gold drama.", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 49, comments: ["Event-ready earrings.", "They move beautifully."] },
+      { id: 82, name: "Gold Threader Earrings", price: 440, category: "Jewelry", detail: "Slim threader design with modern minimal shine.", image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80", rating: 4.4, reviews: 32, comments: ["Modern and light.", "Very neat design."] },
+      { id: 83, name: "Gold Curb Bracelet", price: 920, category: "Jewelry", detail: "Curb-link bracelet with strong polish and daily presence.", image: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 69, comments: ["Strong bracelet.", "Great shine."] },
+      { id: 84, name: "Gold Rope Bracelet", price: 810, category: "Jewelry", detail: "Rope-textured bracelet with warm gold detail.", image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80", rating: 4.6, reviews: 42, comments: ["Nice texture.", "Looks good stacked."] },
+      { id: 85, name: "Gold Adjustable Bangle", price: 690, category: "Jewelry", detail: "Adjustable open bangle with polished end details.", image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=80", rating: 4.5, reviews: 36, comments: ["Fits nicely.", "Clean bangle style."] },
+      { id: 86, name: "Gold Charm Set", price: 520, category: "Accessories", detail: "Small gold charms for bracelets, necklaces, and gifts.", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80", rating: 4.4, reviews: 28, comments: ["Cute charm options.", "Good add-on gift."] },
+      { id: 87, name: "Gold Brooch Pin Set", price: 650, category: "Accessories", detail: "Matching formal brooch pins with warm gold accents.", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80", rating: 4.5, reviews: 31, comments: ["Sharp on jackets.", "Nice formal set."] },
+      { id: 88, name: "Gold Collar Stays", price: 290, category: "Accessories", detail: "Executive collar stays with a luxury gold finish.", image: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=900&q=80", rating: 4.2, reviews: 19, comments: ["Smart little detail.", "Good for suits."] },
+      { id: 89, name: "Gold Bookmark", price: 260, category: "Accessories", detail: "Polished bookmark for refined reading and gifting.", image: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=900&q=80", rating: 4.3, reviews: 22, comments: ["Nice desk gift.", "Feels thoughtful."] },
+      { id: 90, name: "Gold Compact Mirror", price: 570, category: "Accessories", detail: "Gift-ready compact mirror with gold-tone casing.", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80", rating: 4.4, reviews: 27, comments: ["Pretty handbag item.", "Looks classy."] },
+      { id: 91, name: "Gold Quarter Bar", price: 1180, category: "Bullion", detail: "Quarter-size bullion bar for reserve building.", image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 46, comments: ["Good reserve size.", "Clean bar finish."] },
+      { id: 92, name: "Gold Half Bar", price: 2360, category: "Bullion", detail: "Half-weight bullion bar with secure presentation.", image: "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 39, comments: ["Strong reserve buy.", "Presentation was premium."] },
+      { id: 93, name: "Gold Assay Bar", price: 1740, category: "Bullion", detail: "Assay-style bar packaged for confident collecting.", image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 53, comments: ["Secure packaging.", "Good collector piece."] },
+      { id: 94, name: "Gold CombiBar", price: 3200, category: "Bullion", detail: "Segmented bullion bar styling for flexible reserve planning.", image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 34, comments: ["Interesting reserve format.", "Very clean segments."] },
+      { id: 95, name: "Gold Coin Tube", price: 4120, category: "Bullion", detail: "Tube-style collector coin reserve for serious buyers.", image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?auto=format&fit=crop&w=900&q=80", rating: 5.0, reviews: 29, comments: ["Serious collector order.", "Excellent presentation."] },
+      { id: 96, name: "Gold Dress Watch", price: 2240, category: "Timepiece", detail: "Elegant dress watch with subtle gold-tone finishing.", image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80", rating: 4.8, reviews: 48, comments: ["Elegant wrist presence.", "Perfect for formal wear."] },
+      { id: 97, name: "Gold Sport Watch", price: 2860, category: "Timepiece", detail: "Sport-luxury watch styling with polished gold accents.", image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=900&q=80", rating: 4.7, reviews: 41, comments: ["Sporty but rich.", "Feels strong."] },
+      { id: 98, name: "Gold Moonphase Watch", price: 3980, category: "Timepiece", detail: "Moonphase-inspired timepiece with collector dial detail.", image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 35, comments: ["Beautiful dial.", "Collector style is excellent."] },
+      { id: 99, name: "Gold Travel Clock", price: 980, category: "Timepiece", detail: "Compact travel clock with refined gold-tone trim.", image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80", rating: 4.5, reviews: 24, comments: ["Great desk/travel item.", "Small and classy."] },
+      { id: 100, name: "Gold Luxury Bundle", price: 5200, category: "Accessories", detail: "Premium bundle of selected gold accessories for gifting.", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80", rating: 4.9, reviews: 44, comments: ["Big gift energy.", "Everything looked coordinated."] }
     ];
 
     // ================= INIT =================
@@ -2924,10 +3491,27 @@
   `;
       stack.appendChild(toast);
       setTimeout(() => {
-        toast.style.opacity = "0";
-        toast.style.transform = "translateY(10px)";
-        setTimeout(() => toast.remove(), 220);
-      }, 3200);
+        toast.classList.add("rolling-out");
+        setTimeout(() => toast.remove(), 540);
+      }, 3800);
+    }
+
+    function showLoadingPopout(title, message) {
+      document.getElementById("loadingTitle").innerText = title;
+      document.getElementById("loadingText").innerText = message;
+      document.getElementById("loadingPopout").classList.remove("hidden");
+    }
+
+    function hideLoadingPopout() {
+      document.getElementById("loadingPopout").classList.add("hidden");
+    }
+
+    function withLoadingPopout(title, message, action, delay = 850) {
+      showLoadingPopout(title, message);
+      setTimeout(() => {
+        action();
+        hideLoadingPopout();
+      }, delay);
     }
 
     function formatMoney(amount) {
@@ -2995,6 +3579,10 @@
     function getAuriReply(message) {
       const text = message.toLowerCase();
 
+      if (text.includes("payment") || text.includes("pay ") || text.includes("make payment") || text.includes("buy") || text.includes("order")) {
+        return "To make payment: 1. Add your goods to cart. 2. Open checkout. 3. Fill delivery address, email, phone, city, and state. 4. Choose Paystack or Bank transfer. 5. If you use bank transfer, send payment to Moniepoint 5195531976, account name Ebuka Gold, then tick 'I've transferred the money' before placing the order.";
+      }
+
       if (text.includes("price") || text.includes("cost") || text.includes("how much")) {
         return "You can search the catalog by item name or category. Product prices are shown on every card, and checkout gives a final total with delivery.";
       }
@@ -3008,7 +3596,7 @@
       }
 
       if (text.includes("delivery") || text.includes("dispatch") || text.includes("shipping")) {
-        return "Delivery options include insured courier, white-glove handoff, and pickup appointment. You can select the method inside checkout.";
+        return "Enter your address, city, state, phone, and email in checkout. After the order is confirmed, the team will contact you with the delivery arrangement.";
       }
 
       if (text.includes("search") || text.includes("find")) {
@@ -3019,7 +3607,7 @@
         return "I can help with special requests. Click 'Book a free call' or add your request in the checkout concierge note.";
       }
 
-      return "Hi there! How can I assist you today? You can ask about products, pricing, delivery, Paystack, bank transfer, or custom gold requests.";
+      return "Hi there! How can I assist you today? You can ask about products, payment steps, pricing, delivery, Paystack, bank transfer, or custom gold requests.";
     }
 
     function bookFreeCall() {
@@ -3108,17 +3696,13 @@
         return;
       }
 
-      if (activeFeature === "insured" || activeFeature === "dispatch" || activeFeature === "whiteglove") {
+      if (activeFeature === "insured" || activeFeature === "dispatch" || activeFeature === "handoff") {
         if (cart.length === 0) {
           notify("Add an item first", "Choose at least one gold piece before planning delivery.", "error");
           scrollToProducts();
           return;
         }
         checkout();
-        if (activeFeature === "whiteglove" || activeFeature === "dispatch") {
-          document.getElementById("deliveryMethod").value = activeFeature === "whiteglove" ? "140" : "75";
-          updateCheckoutTotals();
-        }
         return;
       }
 
@@ -3139,16 +3723,79 @@
     }
 
     // ================= AUTH =================
+    function setAuthMethod(method) {
+      authMethod = method;
+      const phoneTab = document.getElementById("phoneAuthTab");
+      const passwordTab = document.getElementById("passwordAuthTab");
+      if (phoneTab) phoneTab.classList.toggle("active", method === "phone");
+      if (passwordTab) passwordTab.classList.toggle("active", method === "password");
+      document.getElementById("phoneAuthPanel").classList.toggle("hidden", method !== "phone");
+      document.getElementById("passwordAuthPanel").classList.toggle("hidden", method !== "password");
+    }
+
+    function showAuthStep(step) {
+      document.getElementById("authStartPanel").classList.toggle("hidden", step !== "start");
+      document.getElementById("phoneAuthPanel").classList.toggle("hidden", step !== "phone");
+      document.getElementById("passwordAuthPanel").classList.toggle("hidden", step !== "password");
+    }
+
+    function backToAuthStart() {
+      showAuthStep("start");
+      document.getElementById("authTitle").innerText = "Welcome to Aurum House";
+      document.querySelector("#authPage .panel-copy").innerText = "Use your email or phone to log in or sign up.";
+    }
+
+    function continueAuthIdentity() {
+      const identity = document.getElementById("authIdentity").value.trim();
+
+      if (!identity) {
+        notify("Email or phone needed", "Enter your email address or mobile number to continue.", "error");
+        return;
+      }
+
+      if (identity.includes("@")) {
+        if (!identity.includes(".")) {
+          notify("Valid email needed", "Enter a valid email address to continue.", "error");
+          return;
+        }
+
+        const username = identity.split("@")[0].trim();
+        document.getElementById("googleEmail").value = identity;
+        document.getElementById("username").value = username;
+        document.getElementById("authFullName").value = username || "Aurum Client";
+        document.getElementById("authTitle").innerText = "Enter your password";
+        document.querySelector("#authPage .panel-copy").innerText = identity;
+        showAuthStep("password");
+        return;
+      }
+
+      const phone = normalizePhone(identity);
+      if (phone.length < 7) {
+        notify("Valid phone needed", "Enter a valid mobile number to receive a code.", "error");
+        return;
+      }
+
+      document.getElementById("authPhone").value = phone;
+      document.getElementById("authFullName").value = "Aurum Client";
+      document.getElementById("googleEmail").value = `${buildPhoneUsername(phone)}@aurum.local`;
+      document.getElementById("authTitle").innerText = "Verify your phone";
+      document.querySelector("#authPage .panel-copy").innerText = "Enter the 6-digit code sent to your mobile number.";
+      showAuthStep("phone");
+      sendPhoneCode();
+    }
+
     function toggleAuth() {
       isSignup = !isSignup;
 
       document.getElementById("authTitle").innerText =
-        isSignup ? "Sign Up" : "Sign In";
+        isSignup ? "Create your account" : "Welcome to Aurum House";
 
       document.getElementById("switchText").innerText =
         isSignup
           ? "Already have account? Sign In"
-          : "Don't have account? Sign Up";
+          : "Don't have account? Create one";
+      showAuthStep("start");
+      document.querySelector("#authPage .panel-copy").innerText = "Use your email or phone to log in or sign up.";
 
     }
 
@@ -3173,9 +3820,102 @@
       showApp();
     }
 
+    function normalizePhone(value) {
+      return value.replace(/\D/g, "").replace(/^0+/, "");
+    }
+
+    function buildPhoneUsername(phone) {
+      return "client_" + normalizePhone(phone).slice(-8);
+    }
+
+    function sendPhoneCode() {
+      const contact = getAuthContact();
+      const email = document.getElementById("googleEmail").value.trim();
+      const fullName = document.getElementById("authFullName").value.trim();
+
+      if (!fullName) {
+        notify("Full name needed", "Enter your full name before requesting a verification code.", "error");
+        return;
+      }
+
+      if (!email || !email.includes("@") || !email.includes(".")) {
+        notify("Email needed", "Enter a valid email address for receipts and account recovery.", "error");
+        return;
+      }
+
+      if (!contact.phone || normalizePhone(contact.phone).length < 7) {
+        notify("Phone number needed", "Enter a valid phone number to receive your sign-in code.", "error");
+        return;
+      }
+
+      pendingOtp = String(Math.floor(100000 + Math.random() * 900000));
+      pendingOtpPhone = contact.fullPhone;
+      document.getElementById("otpDestination").innerText = contact.fullPhone;
+      document.getElementById("otpBox").classList.remove("hidden");
+
+      withLoadingPopout("Sending code", `Sending verification code to ${contact.fullPhone}...`, () => {
+        notify("Verification code sent", `Demo SMS code: ${pendingOtp}`, "success");
+      }, 750);
+    }
+
+    function verifyPhoneCode() {
+      const enteredCode = document.getElementById("authOtp").value.trim();
+      const fullName = document.getElementById("authFullName").value.trim();
+      const email = document.getElementById("googleEmail").value.trim();
+      const contact = getAuthContact();
+
+      if (!pendingOtp || pendingOtpPhone !== contact.fullPhone) {
+        notify("Code needed", "Send a verification code to your phone first.", "error");
+        return;
+      }
+
+      if (enteredCode !== pendingOtp) {
+        notify("Wrong code", "Enter the 6-digit code sent to your phone.", "error");
+        return;
+      }
+
+      const username = buildPhoneUsername(contact.phone);
+      let user = users.find(item => item.phone === contact.fullPhone || item.username === username || item.email === email);
+
+      if (user) {
+        Object.assign(user, {
+          username: user.username || username,
+          displayName: fullName,
+          email,
+          phone: contact.fullPhone,
+          country: contact.country,
+          state: contact.state,
+          provider: "phone_otp",
+          phoneVerified: true
+        });
+      } else {
+        user = {
+          username,
+          displayName: fullName,
+          password: "",
+          email,
+          phone: contact.fullPhone,
+          country: contact.country,
+          state: contact.state,
+          provider: "phone_otp",
+          phoneVerified: true,
+          createdAt: new Date().toISOString()
+        };
+        users.push(user);
+      }
+
+      localStorage.setItem("users", JSON.stringify(users));
+      pendingOtp = "";
+      withLoadingPopout("Signing in", "Verifying your phone number...", () => {
+        rememberUser(user);
+        notify("Phone verified", "Your phone number is verified and your account is ready.", "success");
+      });
+    }
+
     function handleGoogleAuth() {
       const email = document.getElementById("googleEmail").value.trim();
       const contact = getAuthContact();
+      const fullName = document.getElementById("authFullName").value.trim();
 
       if (!email || !email.includes("@") || !email.includes(".")) {
         notify("Google email needed", "Enter your Google account email to continue.", "error");
@@ -3196,6 +3936,7 @@
           phone: contact.fullPhone,
           country: contact.country,
           state: contact.state,
+          displayName: fullName || user.displayName || username,
           provider: "google"
         });
       } else {
@@ -3206,6 +3947,7 @@
           phone: contact.fullPhone,
           country: contact.country,
           state: contact.state,
+          displayName: fullName || username,
           provider: "google",
           createdAt: new Date().toISOString()
         };
@@ -3213,8 +3955,10 @@
       }
 
       localStorage.setItem("users", JSON.stringify(users));
-      rememberUser(user);
-      notify("Signed in with Google", "Your Google account and phone number are saved for checkout.", "success");
+      withLoadingPopout("Signing in", "Checking your Google details...", () => {
+        rememberUser(user);
+        notify("Signed in with Google", "Your Google account and phone number are saved for checkout.", "success");
+      });
     }
 
     function handleAuth() {
@@ -3253,8 +3997,10 @@
         users.push(newUser);
         localStorage.setItem("users", JSON.stringify(users));
 
-        rememberUser(newUser);
-        notify("Account created", "Your private Aurum House access is ready.", "success");
+        withLoadingPopout("Signing in", "Creating your Aurum House account...", () => {
+          rememberUser(newUser);
+          notify("Account created", "Your private Aurum House access is ready.", "success");
+        });
       } else {
         const user = users.find(
           u => u.username === username && u.password === password
@@ -3275,8 +4021,10 @@
           localStorage.setItem("users", JSON.stringify(users));
         }
 
-        rememberUser(user);
-        notify("Signed in", "Welcome back to your luxury gold marketplace.", "success");
+        withLoadingPopout("Signing in", "Checking your login details...", () => {
+          rememberUser(user);
+          notify("Signed in", "Welcome back to your luxury gold marketplace.", "success");
+        });
       }
     }
 
@@ -3323,9 +4071,11 @@
     }
 
     function logout() {
-      notify("Logging out", "Your session is closing now.", "success");
-      localStorage.removeItem("currentUser");
-      setTimeout(() => location.reload(), 850);
+      withLoadingPopout("Logging out", "Closing your Aurum House session...", () => {
+        notify("Logging out", "Your session is closing now.", "success");
+        localStorage.removeItem("currentUser");
+        setTimeout(() => location.reload(), 500);
+      }, 850);
     }
 
     // ================= ORDERS =================
@@ -3424,7 +4174,6 @@
         ...itemLines,
         "",
         `Subtotal: ${formatMoney(order.subtotal)}`,
-        `Delivery fee: ${formatMoney(order.delivery)}`,
         `Grand total: ${formatMoney(order.grandTotal)}`,
         `Payment method: ${order.payment}`,
         "",
@@ -3436,7 +4185,6 @@
         `State/Region: ${order.state || "Not provided"}`,
         `City: ${order.city}`,
         `Address: ${order.address}`,
-        `Delivery method: ${order.deliveryLabel}`,
         `Estimated delivery date: ${order.deliveryDate}`,
         order.note ? `Note: ${order.note}` : "",
         "",
@@ -3611,6 +4359,10 @@
         return;
       }
 
+      withLoadingPopout("Checking order", "Checking your selected goods before checkout...", openCheckoutPage);
+    }
+
+    function openCheckoutPage() {
       document.getElementById("app").classList.add("hidden");
       document.getElementById("cartOverlay").classList.add("hidden");
       document.getElementById("checkoutPage").classList.remove("hidden");
@@ -3634,6 +4386,7 @@
       });
 
       updateCheckoutTotals();
+      notify("Checkout opened", "Review your goods, fill your details, and choose how you want to pay.", "success");
     }
 
     function fillCheckoutProfile() {
@@ -3662,13 +4415,10 @@
     }
 
     function updateCheckoutTotals() {
-      const delivery = Number(document.getElementById("deliveryMethod").value);
       document.getElementById("checkoutTotal").innerText =
         formatMoney(checkoutSubtotal);
-      document.getElementById("checkoutDelivery").innerText =
-        formatMoney(delivery);
       document.getElementById("grandTotal").innerText =
-        formatMoney(checkoutSubtotal + delivery);
+        formatMoney(checkoutSubtotal);
     }
 
     function updatePaymentMethod() {
@@ -3701,7 +4451,6 @@
       const city = document.getElementById("city").value.trim();
       const state = document.getElementById("state").value;
       const country = getSelectedCountry("countryCode");
-      const deliverySelect = document.getElementById("deliveryMethod");
       const payment = document.querySelector('input[name="payment"]:checked').value;
       const transferConfirmed = document.getElementById("transferConfirmed").checked;
 
@@ -3720,7 +4469,13 @@
         return;
       }
 
-      const delivery = Number(deliverySelect.value);
+      withLoadingPopout("Confirming order", "Confirming your order and payment details...", () => {
+        confirmOrder(address, email, phone, countryCode, city, state, country, payment);
+      }, 950);
+    }
+
+    function confirmOrder(address, email, phone, countryCode, city, state, country, payment) {
+      const delivery = 0;
       const grandTotal = checkoutSubtotal + delivery;
       const fullPhone = `${countryCode} ${phone.replace(/^0+/, "")}`;
       const deliveryDate = getRandomDeliveryDate();
@@ -3746,7 +4501,7 @@
         state,
         city,
         address,
-        deliveryLabel: deliverySelect.options[deliverySelect.selectedIndex].text,
+        deliveryLabel: "Arranged after confirmation",
         deliveryDate,
         note: document.getElementById("orderNote").value.trim()
       };
