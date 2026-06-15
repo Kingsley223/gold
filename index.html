@@ -257,6 +257,22 @@
       box-shadow: 0 0 0 4px rgba(214, 168, 66, 0.12);
     }
 
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    [role="button"]:focus-visible {
+      outline: 3px solid rgba(247, 226, 161, 0.72);
+      outline-offset: 3px;
+    }
+
+    input[aria-invalid="true"],
+    select[aria-invalid="true"],
+    textarea[aria-invalid="true"] {
+      border-color: rgba(228, 111, 111, 0.86);
+      box-shadow: 0 0 0 4px rgba(228, 111, 111, 0.12);
+    }
+
     input::placeholder,
     textarea::placeholder {
       color: rgba(255, 248, 231, 0.42);
@@ -310,6 +326,12 @@
       cursor: pointer;
     }
 
+    .switch-link:focus-visible {
+      border-radius: 6px;
+      outline: 3px solid rgba(247, 226, 161, 0.72);
+      outline-offset: 5px;
+    }
+
     .auth-divider {
       display: flex;
       align-items: center;
@@ -354,7 +376,7 @@
     }
 
     .auth-shell .container {
-      width: min(94vw, 960px);
+      width: min(92vw, 460px);
     }
 
     .auth-panel.market-auth {
@@ -1717,6 +1739,86 @@
       color: var(--emerald);
     }
 
+    .site-footer {
+      margin-top: 68px;
+      padding: 44px clamp(18px, 5vw, 64px) 26px;
+      border-top: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
+        rgba(8, 7, 6, 0.72);
+    }
+
+    body.light-mode .site-footer {
+      background:
+        linear-gradient(180deg, rgba(111, 71, 18, 0.065), rgba(255, 255, 255, 0.35)),
+        rgba(255, 250, 240, 0.88);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(240px, 1.2fr) repeat(3, minmax(150px, 0.8fr));
+      gap: 28px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      max-width: 360px;
+    }
+
+    .footer-brand .logo {
+      margin-bottom: 16px;
+    }
+
+    .footer-brand p,
+    .footer-column p,
+    .footer-bottom {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .footer-column h4 {
+      margin-bottom: 14px;
+      color: var(--champagne);
+      font-size: 12px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .footer-column button,
+    .footer-column span {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 34px;
+      padding: 0;
+      color: var(--muted);
+      background: transparent;
+      text-align: left;
+    }
+
+    .footer-column button:hover {
+      color: var(--champagne);
+    }
+
+    .footer-column .icon {
+      width: 15px;
+      height: 15px;
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      max-width: 1180px;
+      margin: 34px auto 0;
+      padding-top: 22px;
+      border-top: 1px solid rgba(247, 226, 161, 0.12);
+      font-size: 13px;
+    }
+
     .cart-head,
     .cart-total {
       display: flex;
@@ -2416,6 +2518,18 @@
       }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
     @media (max-width: 980px) {
 
       .trust-strip,
@@ -2562,6 +2676,14 @@
         padding: 24px;
       }
 
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+
       .otp-row {
         grid-template-columns: 1fr;
       }
@@ -2650,64 +2772,49 @@
   </svg>
 
   <!-- AUTH -->
-  <div id="authPage" class="auth-shell jumia-style">
+  <div id="authPage" class="auth-shell">
     <div class="container">
       <div class="auth-panel">
-        <div class="jumia-auth-card">
-          <div class="jumia-logo"><svg class="icon"><use href="#icon-spark"></use></svg></div>
-          <h2 id="authTitle">Welcome to Aurum House</h2>
-          <p class="panel-copy">Use your email or phone to log in or sign up.</p>
+        <div class="panel-inner">
+          <div class="brand-mark">A</div>
+          <p class="eyebrow">Private bullion atelier</p>
+          <h2 id="authTitle">Sign In</h2>
+          <p class="panel-copy">Enter the members-only marketplace for curated gold jewelry, bars, and heirloom-grade
+            pieces.</p>
 
-          <div id="authStartPanel" class="jumia-form">
-            <div class="jumia-field">
-              <label for="authIdentity">Email or Mobile Number*</label>
-              <input type="text" id="authIdentity" autocomplete="username">
-            </div>
-            <button class="primary-btn" onclick="continueAuthIdentity()">Continue</button>
+          <label for="googleEmail">Google Account</label>
+          <input type="email" id="googleEmail" placeholder="name@gmail.com" autocomplete="email">
+
+          <label for="authPhone">Phone Number</label>
+          <div class="phone-grid">
+            <select id="authCountryCode" aria-label="Phone country"
+              onchange="updateStateOptions('authCountryCode', 'authState')"></select>
+            <input type="tel" id="authPhone" placeholder="8026270935" autocomplete="tel">
           </div>
 
-          <div id="phoneAuthPanel" class="jumia-form hidden">
-            <div class="jumia-field">
-              <label for="authOtp">Verification Code*</label>
-              <input type="text" id="authOtp" maxlength="6" inputmode="numeric" placeholder="Enter 6-digit code">
-            </div>
-            <button class="primary-btn" onclick="verifyPhoneCode()">Verify & Continue</button>
-            <button class="auth-back" onclick="backToAuthStart()">Change email or phone</button>
-            <button class="auth-back" onclick="sendPhoneCode()">Resend code</button>
-            <div id="otpBox" class="otp-box hidden">
-              <strong>Code sent</strong>
-              <p class="auth-note">For this demo, the code appears in the popup.</p>
-              <div class="otp-meta"><span id="otpDestination">Phone number</span></div>
-            </div>
-          </div>
+          <label for="authState">State / Region</label>
+          <select id="authState"></select>
 
-          <div id="passwordAuthPanel" class="jumia-form hidden">
-            <div class="jumia-field">
-              <label for="password">Password*</label>
-              <input type="password" id="password" autocomplete="current-password">
-            </div>
-            <input type="hidden" id="username">
-            <button class="primary-btn" onclick="handleAuth()">Continue</button>
-            <button class="auth-back" onclick="backToAuthStart()">Change email or phone</button>
-          </div>
+          <input type="hidden" id="authFullName" value="Aurum Client">
 
-          <div class="hidden">
-            <input type="text" id="authFullName">
-            <input type="email" id="googleEmail">
-            <div class="phone-grid">
-              <select id="authCountryCode" aria-label="Phone country"
-                onchange="updateStateOptions('authCountryCode', 'authState')"></select>
-              <input type="tel" id="authPhone">
-            </div>
-            <select id="authState"></select>
-          </div>
+          <button class="secondary-btn google-btn" onclick="handleGoogleAuth()"><span
+              class="google-mark">G</span>Continue with Google</button>
 
-          <div class="jumia-divider">Or log in with</div>
-          <div class="social-row">
-            <button class="social-btn facebook" onclick="notify('Facebook login', 'Facebook sign-in can be connected with a real provider later.', 'success')">f</button>
-            <button class="social-btn google" onclick="handleGoogleAuth()">G</button>
-          </div>
-          <p onclick="toggleAuth()" id="switchText" class="switch-link">Don't have account? Create one</p>
+          <div class="auth-divider">or use password</div>
+
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Your client name" autocomplete="username">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Your private code" autocomplete="current-password">
+
+          <button class="primary-btn" onclick="handleAuth()"><svg class="icon">
+              <use href="#icon-lock"></use>
+            </svg>Continue</button>
+
+          <p onclick="toggleAuth()" onkeydown="handleSwitchKey(event)" id="switchText" class="switch-link" role="button"
+            tabindex="0">
+            Don't have account? Sign Up
+          </p>
         </div>
       </div>
     </div>
@@ -2986,13 +3093,68 @@
 
       <section id="products"></section>
     </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-badge">A</div>
+            <div>
+              <h2>Aurum House</h2>
+              <span>GoldMarket Pro</span>
+            </div>
+          </div>
+          <p>Private-house gold shopping for jewelry, bullion, timepieces, and polished reserve pieces.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Shop</h4>
+          <button onclick="searchCategory('Jewelry')"><svg class="icon">
+              <use href="#icon-gem"></use>
+            </svg>Jewelry</button>
+          <button onclick="searchCategory('Bullion')"><svg class="icon">
+              <use href="#icon-shield"></use>
+            </svg>Bullion</button>
+          <button onclick="searchCategory('Timepiece')"><svg class="icon">
+              <use href="#icon-card"></use>
+            </svg>Timepieces</button>
+        </div>
+        <div class="footer-column">
+          <h4>Client Desk</h4>
+          <button onclick="openOrders()"><svg class="icon">
+              <use href="#icon-card"></use>
+            </svg>My Orders</button>
+          <button onclick="toggleCart()"><svg class="icon">
+              <use href="#icon-cart"></use>
+            </svg>Cart</button>
+          <button onclick="toggleChat()"><svg class="icon">
+              <use href="#icon-spark"></use>
+            </svg>Concierge Chat</button>
+        </div>
+        <div class="footer-column">
+          <h4>Payment</h4>
+          <span><svg class="icon">
+              <use href="#icon-check"></use>
+            </svg>Paystack checkout</span>
+          <span><svg class="icon">
+              <use href="#icon-check"></use>
+            </svg>Bank transfer review</span>
+          <span><svg class="icon">
+              <use href="#icon-truck"></use>
+            </svg>Delivery arranged after order</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Aurum House. All rights reserved.</span>
+        <span>Private reserve marketplace experience.</span>
+      </div>
+    </footer>
   </div>
 
   <!-- CART -->
-  <div id="cartOverlay" class="modal-backdrop hidden">
+  <div id="cartOverlay" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
     <div id="cartModal">
       <div class="cart-head">
-        <h3>Your Cart</h3>
+        <h3 id="cartTitle">Your Cart</h3>
         <button class="cart-remove" onclick="toggleCart()" aria-label="Close cart"><svg class="icon">
             <use href="#icon-close"></use>
           </svg></button>
@@ -3038,11 +3200,12 @@
                 <div class="form-grid">
                   <div>
                     <label for="address">Address</label>
-                    <input type="text" id="address" placeholder="Delivery address">
+                    <input type="text" id="address" placeholder="Delivery address" autocomplete="street-address"
+                      required>
                   </div>
                   <div>
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="customer@email.com">
+                    <input type="email" id="email" placeholder="customer@email.com" autocomplete="email" required>
                   </div>
                   <div>
                     <label for="phone">Phone Number</label>
@@ -3051,12 +3214,12 @@
                         onchange="updateStateOptions('countryCode', 'state')">
                         <option value="+234">Nigeria +234</option>
                       </select>
-                      <input type="text" id="phone" placeholder="8026270935">
+                      <input type="tel" id="phone" placeholder="8026270935" autocomplete="tel-national" required>
                     </div>
                   </div>
                   <div>
                     <label for="city">City</label>
-                    <input type="text" id="city" placeholder="City">
+                    <input type="text" id="city" placeholder="City" autocomplete="address-level2" required>
                   </div>
                   <div>
                     <label for="state">State / Region</label>
@@ -3126,7 +3289,7 @@
   </div>
 
   <!-- ORDERS -->
-  <div id="ordersOverlay" class="modal-backdrop hidden">
+  <div id="ordersOverlay" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="ordersTitle">
     <div id="ordersModal">
       <div class="cart-head">
         <h3 id="ordersTitle">My Orders</h3>
@@ -3139,7 +3302,7 @@
   </div>
 
   <!-- FEATURE DETAIL -->
-  <div id="featureOverlay" class="modal-backdrop hidden">
+  <div id="featureOverlay" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="featureTitle">
     <div id="featureModal">
       <div class="cart-head">
         <h3 id="featureTitle">Feature</h3>
@@ -3161,7 +3324,8 @@
   </div>
 
   <!-- PRODUCT DETAIL -->
-  <div id="productOverlay" class="modal-backdrop hidden">
+  <div id="productOverlay" class="modal-backdrop hidden" role="dialog" aria-modal="true"
+    aria-labelledby="productDetailTitle">
     <div id="productModal">
       <div class="cart-head">
         <h3 id="productDetailTitle">Product Detail</h3>
@@ -3195,7 +3359,7 @@
         <div class="chat-avatar">A</div>
         <div class="chat-title">
           <div><strong>Auri</strong> <span>Aurum House Concierge</span></div>
-          <div class="chat-status"><span class="status-dot"></span>Online — usually replies instantly</div>
+          <div class="chat-status"><span class="status-dot"></span>Online - usually replies instantly</div>
         </div>
       </div>
       <button class="chat-close" onclick="toggleChat()" aria-label="Close chat"><svg class="icon">
@@ -3231,8 +3395,8 @@
   <script>
     // ================= STATE =================
     let isSignup = false;
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    let users = readStorage("users", []);
+    let orders = readStorage("orders", []);
     let currentUser = localStorage.getItem("currentUser");
     let cart = [];
     let checkoutSubtotal = 0;
@@ -3436,6 +3600,56 @@
       option.addEventListener("change", updatePaymentMethod);
     });
 
+    document.addEventListener("keydown", event => {
+      if (event.key !== "Escape") return;
+      document.getElementById("profileMenu")?.classList.add("hidden");
+      document.getElementById("cartOverlay")?.classList.add("hidden");
+      document.getElementById("ordersOverlay")?.classList.add("hidden");
+      document.getElementById("featureOverlay")?.classList.add("hidden");
+      document.getElementById("productOverlay")?.classList.add("hidden");
+    });
+
+    function readStorage(key, fallback) {
+      try {
+        const value = JSON.parse(localStorage.getItem(key));
+        return Array.isArray(value) ? value : fallback;
+      } catch (error) {
+        console.warn(`Resetting unreadable ${key} storage`, error);
+        localStorage.removeItem(key);
+        return fallback;
+      }
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[character]));
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+    }
+
+    function setFieldState(id, isInvalid) {
+      const field = document.getElementById(id);
+      if (field) field.setAttribute("aria-invalid", isInvalid ? "true" : "false");
+    }
+
+    function clearFieldStates(ids) {
+      ids.forEach(id => setFieldState(id, false));
+    }
+
+    function handleSwitchKey(event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleAuth();
+      }
+    }
+
     function initEmailService() {
       const isConfigured = emailConfig.publicKey && !emailConfig.publicKey.startsWith("YOUR_");
       if (isConfigured && window.emailjs) {
@@ -3485,9 +3699,10 @@
       const toast = document.createElement("div");
       const icon = type === "error" ? "icon-close" : type === "success" ? "icon-check" : "icon-spark";
       toast.className = "toast " + type;
+      toast.setAttribute("role", type === "error" ? "alert" : "status");
       toast.innerHTML = `
     <div class="toast-icon"><svg class="icon"><use href="#${icon}"></use></svg></div>
-    <div><strong>${title}</strong><span>${message}</span></div>
+    <div><strong>${escapeHTML(title)}</strong><span>${escapeHTML(message)}</span></div>
   `;
       stack.appendChild(toast);
       setTimeout(() => {
@@ -3529,6 +3744,26 @@
       return "★★★★★".slice(0, rounded) + "☆☆☆☆☆".slice(0, 5 - rounded);
     }
 
+    function formatMoney(amount) {
+      amount = Number(amount || 0);
+      return "$" + amount.toLocaleString() + " / NGN " + (amount * nairaRate).toLocaleString();
+    }
+
+    function formatNaira(amount) {
+      amount = Number(amount || 0);
+      return "NGN " + (amount * nairaRate).toLocaleString();
+    }
+
+    function renderStars(rating) {
+      const rounded = Math.max(0, Math.min(5, Math.round(Number(rating || 0))));
+      return "★★★★★".slice(0, rounded) + "☆☆☆☆☆".slice(0, 5 - rounded);
+    }
+
+    function renderStars(rating) {
+      const rounded = Math.max(0, Math.min(5, Math.round(Number(rating || 0))));
+      return "*".repeat(rounded) + "-".repeat(5 - rounded);
+    }
+
     function getRandomDeliveryDate() {
       const daysToAdd = Math.floor(Math.random() * 7) + 3;
       const date = new Date();
@@ -3555,7 +3790,7 @@
       messages.innerHTML += `
     <div class="chat-row ${sender}">
       ${avatar}
-      <div class="chat-bubble">${message}</div>
+      <div class="chat-bubble">${escapeHTML(message)}</div>
     </div>
   `;
       messages.scrollTop = messages.scrollHeight;
@@ -3677,7 +3912,7 @@
       document.getElementById("featureIcon").setAttribute("href", "#" + feature.icon);
       document.getElementById("featureText").innerText = feature.text;
       document.getElementById("featureList").innerHTML = feature.bullets.map(item =>
-        `<li><svg class="icon"><use href="#icon-check"></use></svg>${item}</li>`
+        `<li><svg class="icon"><use href="#icon-check"></use></svg>${escapeHTML(item)}</li>`
       ).join("");
       document.getElementById("featureAction").innerHTML =
         `<svg class="icon"><use href="#icon-check"></use></svg>${feature.action}`;
@@ -3729,20 +3964,25 @@
       const passwordTab = document.getElementById("passwordAuthTab");
       if (phoneTab) phoneTab.classList.toggle("active", method === "phone");
       if (passwordTab) passwordTab.classList.toggle("active", method === "password");
-      document.getElementById("phoneAuthPanel").classList.toggle("hidden", method !== "phone");
-      document.getElementById("passwordAuthPanel").classList.toggle("hidden", method !== "password");
+      const phonePanel = document.getElementById("phoneAuthPanel");
+      const passwordPanel = document.getElementById("passwordAuthPanel");
+      if (phonePanel) phonePanel.classList.toggle("hidden", method !== "phone");
+      if (passwordPanel) passwordPanel.classList.toggle("hidden", method !== "password");
     }
 
     function showAuthStep(step) {
-      document.getElementById("authStartPanel").classList.toggle("hidden", step !== "start");
-      document.getElementById("phoneAuthPanel").classList.toggle("hidden", step !== "phone");
-      document.getElementById("passwordAuthPanel").classList.toggle("hidden", step !== "password");
+      const startPanel = document.getElementById("authStartPanel");
+      const phonePanel = document.getElementById("phoneAuthPanel");
+      const passwordPanel = document.getElementById("passwordAuthPanel");
+      if (startPanel) startPanel.classList.toggle("hidden", step !== "start");
+      if (phonePanel) phonePanel.classList.toggle("hidden", step !== "phone");
+      if (passwordPanel) passwordPanel.classList.toggle("hidden", step !== "password");
     }
 
     function backToAuthStart() {
       showAuthStep("start");
-      document.getElementById("authTitle").innerText = "Welcome to Aurum House";
-      document.querySelector("#authPage .panel-copy").innerText = "Use your email or phone to log in or sign up.";
+      document.getElementById("authTitle").innerText = "Sign In";
+      document.querySelector("#authPage .panel-copy").innerText = "Enter the members-only marketplace for curated gold jewelry, bars, and heirloom-grade pieces.";
     }
 
     function continueAuthIdentity() {
@@ -3754,7 +3994,7 @@
       }
 
       if (identity.includes("@")) {
-        if (!identity.includes(".")) {
+        if (!isValidEmail(identity)) {
           notify("Valid email needed", "Enter a valid email address to continue.", "error");
           return;
         }
@@ -3788,14 +4028,14 @@
       isSignup = !isSignup;
 
       document.getElementById("authTitle").innerText =
-        isSignup ? "Create your account" : "Welcome to Aurum House";
+        isSignup ? "Sign Up" : "Sign In";
 
       document.getElementById("switchText").innerText =
         isSignup
           ? "Already have account? Sign In"
-          : "Don't have account? Create one";
+          : "Don't have account? Sign Up";
       showAuthStep("start");
-      document.querySelector("#authPage .panel-copy").innerText = "Use your email or phone to log in or sign up.";
+      document.querySelector("#authPage .panel-copy").innerText = "Enter the members-only marketplace for curated gold jewelry, bars, and heirloom-grade pieces.";
 
     }
 
@@ -3838,7 +4078,8 @@
         return;
       }
 
-      if (!email || !email.includes("@") || !email.includes(".")) {
+      setFieldState("googleEmail", !isValidEmail(email));
+      if (!isValidEmail(email)) {
         notify("Email needed", "Enter a valid email address for receipts and account recovery.", "error");
         return;
       }
@@ -3917,7 +4158,9 @@
       const contact = getAuthContact();
       const fullName = document.getElementById("authFullName").value.trim();
 
-      if (!email || !email.includes("@") || !email.includes(".")) {
+      setFieldState("googleEmail", !isValidEmail(email));
+      setFieldState("authPhone", !contact.phone);
+      if (!isValidEmail(email)) {
         notify("Google email needed", "Enter your Google account email to continue.", "error");
         return;
       }
@@ -3991,6 +4234,7 @@
           phone: contact.fullPhone,
           country: contact.country,
           state: contact.state,
+          displayName: username,
           provider: "password",
           createdAt: new Date().toISOString()
         };
@@ -4032,8 +4276,10 @@
     function showApp() {
       document.getElementById("authPage").classList.add("hidden");
       document.getElementById("app").classList.remove("hidden");
-      document.getElementById("profileName").innerText = currentUser || "Client";
-      document.getElementById("profileInitial").innerText = (currentUser || "A").charAt(0).toUpperCase();
+      const user = users.find(item => item.username === currentUser);
+      const displayName = user && user.displayName ? user.displayName : currentUser || "Client";
+      document.getElementById("profileName").innerText = displayName;
+      document.getElementById("profileInitial").innerText = (displayName || "A").charAt(0).toUpperCase();
       updateProfileDetails();
 
       cart = [];
@@ -4102,6 +4348,45 @@
     function renderOrders() {
       const list = document.getElementById("ordersList");
       const visibleOrders = getUserOrders();
+
+      if (visibleOrders.length > 0) {
+        list.innerHTML = visibleOrders.map(order => `
+    <div class="order-card">
+      <div class="order-top">
+        <div>
+          <strong>${escapeHTML(order.id)}</strong>
+          <span>${escapeHTML(order.date)} - ${escapeHTML(order.user)}</span>
+        </div>
+        <div class="order-status">${escapeHTML(order.status)}</div>
+      </div>
+      <div class="order-items">
+        ${(order.items || []).map(item => `
+          <div class="order-item">
+            <span>${escapeHTML(item.name)} <small>(${escapeHTML(item.category)})</small></span>
+            <strong>${formatMoney(item.price)}</strong>
+          </div>
+        `).join("")}
+      </div>
+      <div class="order-details">
+        <div><span>Total</span><b>${formatMoney(order.grandTotal)}</b></div>
+        <div><span>Payment</span><b>${escapeHTML(order.payment)}</b></div>
+        <div><span>Phone</span><b>${escapeHTML(order.phone)}</b></div>
+        <div><span>Email</span><b>${escapeHTML(order.email || "Not provided")}</b></div>
+        <div><span>Delivery</span><b>${escapeHTML(order.deliveryLabel)}</b></div>
+        <div><span>Delivery Date</span><b>${escapeHTML(order.deliveryDate || "Pending")}</b></div>
+        <div><span>Country</span><b>${escapeHTML(order.country || "Not provided")}</b></div>
+        <div><span>State</span><b>${escapeHTML(order.state || "Not provided")}</b></div>
+        <div><span>City</span><b>${escapeHTML(order.city)}</b></div>
+        <div><span>Address</span><b>${escapeHTML(order.address)}</b></div>
+        <div><span>Mail Message</span><b>${escapeHTML(order.emailMessage || "Receipt saved in My Orders.")}</b></div>
+      </div>
+      <div class="order-actions">
+        <button class="secondary-btn" onclick="openEmailReceipt('${escapeHTML(order.id)}')"><svg class="icon"><use href="#icon-card"></use></svg> Open Email Receipt</button>
+      </div>
+    </div>
+  `).join("");
+        return;
+      }
 
       if (visibleOrders.length === 0) {
         list.innerHTML = `
@@ -4226,22 +4511,21 @@
         return;
       }
 
-      filteredProducts.forEach(p => {
-        container.innerHTML += `
+      container.innerHTML = filteredProducts.map(p => `
       <div class="card" onclick="openProductDetail(${p.id})">
         <div class="product-image">
-          <img src="${p.image}" alt="${p.name}">
-          <span class="product-badge"><svg class="icon"><use href="#icon-gem"></use></svg>${p.category}</span>
+          <img src="${p.image}" alt="${escapeHTML(p.name)}" loading="lazy">
+          <span class="product-badge"><svg class="icon"><use href="#icon-gem"></use></svg>${escapeHTML(p.category)}</span>
         </div>
         <div class="card-content">
           <span class="certified">Certified reserve</span>
-          <h4>${p.name}</h4>
-          <p class="product-meta">${p.detail}</p>
+          <h4>${escapeHTML(p.name)}</h4>
+          <p class="product-meta">${escapeHTML(p.detail)}</p>
           <div class="rating-row">
             <span class="stars">${renderStars(p.rating)}</span>
             <span>${p.rating.toFixed(1)} (${p.reviews} reviews)</span>
           </div>
-          <p class="review-snippet">"${p.comments[0]}"</p>
+          <p class="review-snippet">"${escapeHTML(p.comments[0])}"</p>
           <div class="price-row">
             <span class="price">$${p.price.toLocaleString()}<small>${formatNaira(p.price)}</small></span>
             <span class="certified">AU grade</span>
@@ -4249,13 +4533,48 @@
           <button class="primary-btn" onclick="event.stopPropagation(); addToCart(${p.id})"><svg class="icon"><use href="#icon-cart"></use></svg>Add to Cart</button>
         </div>
       </div>
-    `;
-      });
+    `).join("");
     }
 
     function openProductDetail(id) {
       const product = products.find(item => item.id === id);
       if (!product) return;
+
+      document.getElementById("productDetailTitle").innerText = product.name;
+      document.getElementById("productDetailBody").innerHTML = `
+        <div class="product-detail-grid">
+          <div class="product-detail-image">
+            <img src="${product.image}" alt="${escapeHTML(product.name)}">
+          </div>
+          <div class="product-detail-copy">
+            <span class="certified">${escapeHTML(product.category)} - Certified reserve</span>
+            <h4>${escapeHTML(product.name)}</h4>
+            <div class="rating-row">
+              <span class="stars">${renderStars(product.rating)}</span>
+              <span>${product.rating.toFixed(1)} rating from ${product.reviews} reviews</span>
+            </div>
+            <p>${escapeHTML(product.detail)}</p>
+            <div class="detail-meta">
+              <div><span>Price</span><b>${formatMoney(product.price)}</b></div>
+              <div><span>Grade</span><b>AU premium</b></div>
+              <div><span>Handling</span><b>Insured checkout</b></div>
+              <div><span>Availability</span><b>Ready to reserve</b></div>
+            </div>
+            <div class="review-list">
+              ${product.comments.map(comment => `
+                <div class="review-card">
+                  <span>Client comment</span>
+                  <b>${renderStars(product.rating)}</b>
+                  <p>"${escapeHTML(comment)}"</p>
+                </div>
+              `).join("")}
+            </div>
+            <button class="primary-btn" onclick="addToCart(${product.id}); closeProductDetail();"><svg class="icon"><use href="#icon-cart"></use></svg>Add to Cart</button>
+          </div>
+        </div>
+      `;
+      document.getElementById("productOverlay").classList.remove("hidden");
+      return;
 
       document.getElementById("productDetailTitle").innerText = product.name;
       document.getElementById("productDetailBody").innerHTML = `
@@ -4300,6 +4619,10 @@
     // ================= CART =================
     function addToCart(id) {
       const item = products.find(p => p.id === id);
+      if (!item) {
+        notify("Item unavailable", "This product could not be added. Please try another piece.", "error");
+        return;
+      }
       cart.push(item);
       updateCart();
       notify("Added to cart", `${item.name} has joined your reserve.`, "success");
@@ -4315,24 +4638,20 @@
       const list = document.getElementById("cartItems");
       list.innerHTML = "";
 
-      let total = 0;
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
 
-      cart.forEach((item, index) => {
-        total += item.price;
-
-        list.innerHTML += `
+      if (cart.length > 0) {
+        list.innerHTML = cart.map((item, index) => `
       <li>
         <div class="item-main">
-          <img class="item-thumb" src="${item.image}" alt="${item.name}">
-          <div><span>${item.name}</span><small>${item.category}</small></div>
+          <img class="item-thumb" src="${item.image}" alt="${escapeHTML(item.name)}">
+          <div><span>${escapeHTML(item.name)}</span><small>${escapeHTML(item.category)}</small></div>
         </div>
         <strong>${formatMoney(item.price)}</strong>
-        <button class="cart-remove" onclick="removeItem(${index})" aria-label="Remove ${item.name}"><svg class="icon"><use href="#icon-close"></use></svg></button>
+        <button class="cart-remove" onclick="removeItem(${index})" aria-label="Remove ${escapeHTML(item.name)}"><svg class="icon"><use href="#icon-close"></use></svg></button>
       </li>
-    `;
-      });
-
-      if (cart.length === 0) {
+    `).join("");
+      } else {
         list.innerHTML = `<li><span>Your cart is waiting for its first piece.</span></li>`;
       }
 
@@ -4342,6 +4661,7 @@
 
     function removeItem(index) {
       const removed = cart[index];
+      if (!removed) return;
       cart.splice(index, 1);
       updateCart();
       notify("Removed from cart", `${removed.name} was removed from your reserve.`, "success");
@@ -4371,19 +4691,15 @@
       const list = document.getElementById("checkoutItems");
       list.innerHTML = "";
 
-      checkoutSubtotal = 0;
-
-      cart.forEach(item => {
-        checkoutSubtotal += item.price;
-        list.innerHTML += `
+      checkoutSubtotal = cart.reduce((sum, item) => sum + item.price, 0);
+      list.innerHTML = cart.map(item => `
       <li>
         <div class="item-main">
-          <img class="item-thumb" src="${item.image}" alt="${item.name}">
-          <div><span>${item.name}</span><small>${item.category}</small></div>
+          <img class="item-thumb" src="${item.image}" alt="${escapeHTML(item.name)}">
+          <div><span>${escapeHTML(item.name)}</span><small>${escapeHTML(item.category)}</small></div>
         </div>
         <strong>${formatMoney(item.price)}</strong>
-      </li>`;
-      });
+      </li>`).join("");
 
       updateCheckoutTotals();
       notify("Checkout opened", "Review your goods, fill your details, and choose how you want to pay.", "success");
@@ -4453,14 +4769,29 @@
       const country = getSelectedCountry("countryCode");
       const payment = document.querySelector('input[name="payment"]:checked').value;
       const transferConfirmed = document.getElementById("transferConfirmed").checked;
+      const requiredFields = ["address", "email", "phone", "city", "state"];
+      const missingFields = requiredFields.filter(id => !document.getElementById(id).value.trim());
 
-      if (!address || !email || !phone || !city || !state) {
+      clearFieldStates(requiredFields);
+
+      if (missingFields.length > 0) {
+        missingFields.forEach(id => setFieldState(id, true));
+        document.getElementById(missingFields[0]).focus();
         notify("Delivery details needed", "Fill address, email, city, state, and phone number to place the order.", "error");
         return;
       }
 
-      if (!email.includes("@") || !email.includes(".")) {
+      if (!isValidEmail(email)) {
+        setFieldState("email", true);
+        document.getElementById("email").focus();
         notify("Email needed", "Enter a valid email address for the order receipt.", "error");
+        return;
+      }
+
+      if (normalizePhone(phone).length < 7) {
+        setFieldState("phone", true);
+        document.getElementById("phone").focus();
+        notify("Phone number needed", "Enter a valid phone number for delivery updates.", "error");
         return;
       }
 
